@@ -1,28 +1,34 @@
 #include <stdio.h>
+#include <string.h>
 /**
- *main - prints all possible different combinations of three digits
+ * main - prints all possible different combinations of three base-10 digits
  *
- * Return: always 0
+ * Return: 0 if execution was successful
  */
 int main(void)
 {
-	int ones = '0';
-	int tens = '0';
-	int hundreds = '0';
+	int digit1;
+	int digit2;
+	int digit3;
 
-	for (hundreds = '0'; hundreds <= '9'; hundreds++)
+	for (digit1 = 0x30; digit1 <= 0x39; digit1++)
 	{
-		for (tens = '0'; tens <= '9'; tens++)
+		for (digit2 = 0x30; digit2 <= 0x39; digit2++)
 		{
-			for (ones = '0'; ones <= '9'; ones++)
+			for (digit3 = 0x30; digit3 <= 0x39; digit3++)
 			{
-				if (!((ones == tens) || (tens == hundreds)
-							|| (tens > ones) || (hundreds > tens)))
+				if (digit1 < digit2 && digit2 < digit3)
 				{
-					putchar(hundreds);
-					putchar(tens);
-					putchar(ones);
-					if (!(ones == '9' && tens == '8'))
+					int req1;
+					int req2;
+
+					putchar(digit1);
+					putchar(digit2);
+					putchar(digit3);
+					req1 = digit1 >= 0x30 && digit1 < 0x37;
+					req2 = digit2 >= 0x30 && digit2 <= 0x38;
+
+					if (req1 && req2 && digit3 <= 0x39)
 					{
 						putchar(',');
 						putchar(' ');
@@ -31,6 +37,7 @@ int main(void)
 			}
 		}
 	}
+
 	putchar('\n');
 	return (0);
 }
